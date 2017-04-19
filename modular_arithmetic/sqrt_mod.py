@@ -7,6 +7,7 @@ def sqrtMod(a, p):
     return powMod(a, m + 1, p)
 
   if(p%4 == 1):
+    m = (p-1)/4
     b = lookForB(p)
     i = m*2
     j = 0

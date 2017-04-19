@@ -8,7 +8,7 @@ def babyStepGiantStep(alpha, beta, prime):
     Returns log_alpha (beta) mod prime
   """
 
-  m = int(ceil(isqrt(p - 1)))
+  m = int(ceil(isqrt(prime - 1)))
 
   Table = {}
 

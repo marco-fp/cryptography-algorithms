@@ -28,7 +28,7 @@ def extendedGcd(a, b):
     y2 = y1
     y1 = y
 
-if a < 0:
-  return -a. -x2, -y2
+  if a < 0:
+    return -a, -x2, -y2
 
-return a, x2, y2
+  return a, x2, y2

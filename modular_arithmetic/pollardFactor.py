@@ -7,7 +7,7 @@ def pollardFactor(n):
         a = (a*a + 1) % n
         b = (b*b + 1) % n
         b = (b*b + 1) % n
-        d = gcd(p, q)
+        d = gcd(a - b, n)
         if( 1 < d and d < n):
             return d
         if(d == n):

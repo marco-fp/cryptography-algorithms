@@ -1,5 +1,5 @@
 import random
-
+from pow_mod import powMod
 
 def miller_rabin(n, k):
   if n == 2 or n == 3:
@@ -15,7 +15,7 @@ def miller_rabin(n, k):
     d  = d / 2
     s += 1
 
-  a = random.randrange(2, p-2, 1)
+  a = random.randrange(2, n - 2, 1)
   x = powMod(a, d, n)
 
   if x == 1 or x == n - 1:
