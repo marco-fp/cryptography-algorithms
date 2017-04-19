@@ -15,6 +15,7 @@ def main():
   print euclidean.extendedGcd(1128,231)
   elapsed_time = time.time() - start_time
   print("%0.10f" % elapsed_time)
+  print "GAP takes: 0"
 
 
   print "2. inverseMod: (443, 7): "
@@ -29,12 +30,15 @@ def main():
   print pow_mod.powMod(36780481, 9476407, 768479)
   elapsed_time = time.time() - start_time
   print("%0.10f" % elapsed_time)
+  print "GAP takes: 0"
 
-  print "4. Miller Rabin: (123456789101119)"
+  print "4. Miller Rabin: (58021664585639791181184025950440248398226136069516938232493687505822471836536824298822733710342250697739996825938232641940670857624514103125986134050997697160127301547995788468137887651823707102007839) \n"
   start_time = time.time()
-  print miller_rabin.miller_rabin(123456789101119, 10)
+  print miller_rabin.miller_rabin(58021664585639791181184025950440248398226136069516938232493687505822471836536824298822733710342250697739996825938232641940670857624514103125986134050997697160127301547995788468137887651823707102007839, 10)
   elapsed_time = time.time() - start_time
+  print "Time: "
   print("%0.10f" % elapsed_time)
+  print("Online Sagemath takes: 1.0491859913")
 
 
   print "5. Baby step giant step: (3, 2, 29)"
