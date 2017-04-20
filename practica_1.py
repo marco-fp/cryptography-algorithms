@@ -60,9 +60,10 @@ def main():
   print("%0.10f" % elapsed_time)
 
 
-  print "7.1. Fermat factorization method: (123456789123456789)"
+  print "7.1. Fermat factorization method: (123456*123456)"
   start_time = time.time()
-  #print fermatFactor.fermatFactor(10)
+  big_number = 123456*123456
+  print fermatFactor.fermatFactor(big_number)
   elapsed_time = time.time() - start_time
   print("%0.10f" % elapsed_time)
 
