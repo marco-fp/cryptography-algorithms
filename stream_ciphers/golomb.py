@@ -62,6 +62,6 @@ def golomb(n)
         autocorrelations.append(autocorrelation)
 
         if(autocorrelations[i - 1] != autocorrelations[i]):
-            return False
+            return False # Does not meet postulate 3.
 
     return True
