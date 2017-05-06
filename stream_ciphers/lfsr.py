@@ -3,7 +3,7 @@
  Handbook of Applied Cryptography, chapter 6.
 '''
 
-def lsfr(polynomial, seed, output_length):
+def LFSR(polynomial, seed, output_length):
     '''
         INPUT:
             - polynomial: Connection polynomial given as an array of 1s and 0s.
