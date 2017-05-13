@@ -1,4 +1,4 @@
-def golomb(n)
+def golomb(n):
     '''
         Checks if secuence meets Golomb's 3 postulates:
             1. Number of 0s and number of 1s is as near as possible to n/2, where n is secuence's length.
@@ -6,17 +6,21 @@ def golomb(n)
             3. The out-of-phase correlation should be constant, independent of the shift.
     '''
     secuence = str(n)
+
     n0 = secuence.count('0')
     n1 = secuence.count('1')
 
     if abs(n0 - n1) > 1:
+        print "Does not meet postulate 1."
         return False # Does not meet postulate 1.
 
     secuence_length = len(secuence)
 
     # Shift secuence until first and last element are different.
+    i = 0
     while secuence[0] == secuence[secuence_length - 1]:
-        if i > len(secuence):
+        if i > secuence_length:
+            print "Does not meet postulate 2."
             return False # Does not meet postulate 2.
         secuence = secuence[1:] + secuence[0]
         i += 1
@@ -38,30 +42,36 @@ def golomb(n)
             run_length = 1
 
     if not runs:
+        print "Does not meet postulate 2."
         return False # Does not meet postulate 2.
 
     runs_keys = runs.keys()
 
+    secuence = str(n) # Re-asign secuence with initial value
+
     for i in xrange(0, len(runs_keys) - 1):
         if(abs(runs_keys[i] - runs_keys[i + 1]) != 1):
+            print "Does not meet postulate 2."
             return False # Does not meet postulate 2.
 
         current_run_count = len(runs[runs_keys[i]])
         next_run_count = len(runs[runs_keys[i+1]])
         if(current_run_count != 2*next_run_count):
             if(current_run_count != 1 and next_run_count != 1):
+                print "Does not meet postulate 2."
                 return False # Does not meet postulate 2.
 
     autocorrelations = []
     autocorrelation = sum(int(a)*int(b) for a, b in zip(secuence, secuence[1:] + secuence[:1]))
     autocorrelations.append(autocorrelation)
 
-    for i in xrange(2, secuence_length):
+    for i in xrange(1, secuence_length):
         shifted_secuence = secuence[i:] + secuence[:i]
         autocorrelation = sum(int(a)*int(b) for a, b in zip(secuence, shifted_secuence))
         autocorrelations.append(autocorrelation)
 
         if(autocorrelations[i - 1] != autocorrelations[i]):
+            print "Does not meet postulate 3."
             return False # Does not meet postulate 3.
 
     return True
