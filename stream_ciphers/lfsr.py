@@ -31,8 +31,3 @@ def LFSR(polynomial, seed, output_length):
         flipflops = [s] + flipflops[:-1] # Add feedback to as first element and pop last element (output-ed).
 
     return output
-
-
-# pseudorand_binary_str = ''.join(map(str,LFSR([1,0,0,1], [1,0,0,1], 2**4 - 1)))
-# print pseudorand_binary_str
-# print golomb(pseudorand_binary_str)

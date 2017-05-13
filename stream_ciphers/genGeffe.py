@@ -23,22 +23,3 @@ def encrypt_decrypt(keystream, text):
     result.append(chr(ord(i) ^ j))
 
   return result
-
-
-message = "Don't Panic!"
-length = len(message)
-
-keystream = genGeffe([1,1,0,0,1,0], [1,1,1,1,0,1],
-                     [1,0,1,0,1,1], [1,0,1,1,1,1],
-                     [1,1,0,1,0,0], [1,1,0,1,0,0],
-                     length)
-
-ciphered = encrypt_decrypt(keystream, message)
-
-print "Ciphered: " + str(ciphered)
-
-plain = encrypt_decrypt(keystream, ciphered)
-
-print "Plain text: " + str(plain)
-
-# Para conseguir p1p2p3 de periodo, los 3 deben ser primos relativos.
