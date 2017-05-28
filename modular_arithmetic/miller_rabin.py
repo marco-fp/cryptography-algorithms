@@ -1,7 +1,7 @@
 import random
 from pow_mod import powMod
 
-def miller_rabin(n, k):
+def miller_rabin(n):
   if n == 2 or n == 3:
     return True
 
@@ -22,6 +22,7 @@ def miller_rabin(n, k):
     return True
 
   i = 1
+  u = 0
   while(i <= u - 1):
     x = powMod(a, 2, n)
 
@@ -33,5 +34,3 @@ def miller_rabin(n, k):
     i += 1
 
   return False
-
-
