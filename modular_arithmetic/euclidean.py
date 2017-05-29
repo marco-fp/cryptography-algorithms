@@ -32,3 +32,8 @@ def extendedGcd(a, b):
     return -a, -x2, -y2
 
   return a, x2, y2
+
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
