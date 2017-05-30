@@ -20,7 +20,6 @@ def generate_keys(p, q):
     phiEuler = (p-1) * (q-1)
     e = random.randint(1, phiEuler)
 
-
     while gcd(e, phiEuler) != 1:
         e = random.randint(1, phiEuler)
 
@@ -39,6 +38,7 @@ def generate_keys(p, q):
 
     return ('rsa_key.pub', 'rsa_key.priv')
 
+
 def sign(privKey_filename, message_filename):
     privKey = tuple(open(privKey_filename, 'r'))
     key, n = privKey
@@ -56,6 +56,7 @@ def sign(privKey_filename, message_filename):
 
     return signature_filename
 
+
 def verify(pubKey_filename, message_filename, signature_filename):
     pubKey = tuple(open(pubKey_filename, 'r'))
     key, n = pubKey
@@ -70,6 +71,7 @@ def verify(pubKey_filename, message_filename, signature_filename):
     plainSignature = powMod(int(signature), int(key), int(n))
 
     return plainSignature == hashedMessage
+
 
 def main_test():
     message = "Hello my name is Marco"
@@ -95,5 +97,6 @@ def main_test():
     result = verify(pub_filename, message_filename, signature_filename)
 
     print result
+    
 
 main_test()
