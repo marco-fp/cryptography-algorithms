@@ -28,30 +28,72 @@ def generate_keys(p, q):
 
     pubKey = (e, n)
     privKey = (d, n)
-    return (pubKey, privKey)
 
-def sign(privKey, message):
+    output_file = open("rsa_key.priv", "w")
+    output_file.write(str(d) + '\n ' + str(n))
+    output_file.close()
+
+    output_file = open("rsa_key.pub", "w")
+    output_file.write(str(e) + '\n ' + str(n))
+    output_file.close()
+
+    return ('rsa_key.pub', 'rsa_key.priv')
+
+def sign(privKey_filename, message_filename):
+    privKey = tuple(open(privKey_filename, 'r'))
     key, n = privKey
+
+    message_file = tuple(open(message_filename, 'r'))
+    message = message_file[0]
+
     hashedMessage = int(sha512(message).hexdigest(), 16)
-    signature = powMod(hashedMessage, key, n)
+    signature = powMod(hashedMessage, int(key), int(n))
 
-    return signature
+    signature_filename = 'rsa_signature'
+    output_file = open(signature_filename, "w")
+    output_file.write(str(signature))
+    output_file.close()
 
-def verify(pubKey, message, signature):
+    return signature_filename
+
+def verify(pubKey_filename, message_filename, signature_filename):
+    pubKey = tuple(open(pubKey_filename, 'r'))
     key, n = pubKey
-    hashedMessage = int(sha512(message).hexdigest(), 16) % n
-    plainSignature = powMod(signature, key, n)
+
+    message_file = tuple(open(message_filename, 'r'))
+    message = message_file[0]
+
+    signature_file = tuple(open(signature_filename, 'r'))
+    signature = signature_file[0]
+
+    hashedMessage = int(sha512(message).hexdigest(), 16) % int(n)
+    plainSignature = powMod(int(signature), int(key), int(n))
 
     return plainSignature == hashedMessage
 
+def main_test():
+    message = "Hello my name is Marco"
+    message_filename = 'message.txt'
 
+    print 'Message: ', message
+    print 'Writing message to file: \'%s\'' % message_filename
 
-msg = "Hello my name is Marco"
-publicKey, privateKey = generate_keys(prime1, prime2)
-print 'pubkey: ', publicKey
-print 'privkey: ', privateKey
-signature = sign(privateKey, msg)
-print 'signature: ', signature
-result = verify(publicKey, msg, signature)
+    output_file = open(message_filename, "w")
+    output_file.write(str(message))
+    output_file.close()
 
-print result
+    print 'Generating keys, saving them into files: \'rsa_key.priv\' - \'rsa_key.pub\''
+    pub_filename, priv_filename = generate_keys(prime1, prime2)
+
+    print 'Public key filename: ', pub_filename
+    print 'Private key filename: ', priv_filename
+
+    signature_filename = sign(priv_filename, message_filename)
+
+    print 'Signature filename: ', signature_filename
+
+    result = verify(pub_filename, message_filename, signature_filename)
+
+    print result
+
+main_test()
